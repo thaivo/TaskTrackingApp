@@ -210,6 +210,10 @@
     <Compile Include="Migrations\202106030118008_Developer-Skill.Designer.cs">
       <DependentUpon>202106030118008_Developer-Skill.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106030134119_DevID_Update.cs" />
+    <Compile Include="Migrations\202106030134119_DevID_Update.Designer.cs">
+      <DependentUpon>202106030134119_DevID_Update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Assignment.cs" />
@@ -311,6 +315,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106030118008_Developer-Skill.resx">
       <DependentUpon>202106030118008_Developer-Skill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106030134119_DevID_Update.resx">
+      <DependentUpon>202106030134119_DevID_Update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
