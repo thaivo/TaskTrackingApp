@@ -10,6 +10,6 @@ namespace TaskTrackingApp.Models
         public int SkillID { get; set; }
         public string SkillName { get; set; }
 
-        //public ICollection<Developer> Developers { get; set; }
+        public ICollection<Developer> Developers { get; set; }
     }
 }

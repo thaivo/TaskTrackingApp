@@ -14,8 +14,8 @@ namespace TaskTrackingApp.Models
         public string lname { get; set; }
         public string position { get; set; }
         
-        //public ICollection<Task> Tasks { get; set; }
-        //public ICollection<Skill> Skills { get; set; }
+        public ICollection<Assignment> Assignments { get; set; }
+        public ICollection<Skill> Skills { get; set; }
 
     }
 

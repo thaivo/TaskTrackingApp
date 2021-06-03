@@ -31,10 +31,9 @@ namespace TaskTrackingApp.Models
         public Status Status { get; set; }//resolved, tested, opened, in progress, code review, closed, cannot reproduce
         public Priority Priority { get; set; }//Trivial, minor, major, critical, blocker
 
-        /*[ForeignKey("Developer")]
+        [ForeignKey("Developer")]
         public int DevID { get; set; }
         public virtual Developer Developer { get; set; }
-        */
 
     }
 }
