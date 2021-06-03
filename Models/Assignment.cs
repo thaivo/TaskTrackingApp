@@ -32,7 +32,7 @@ namespace TaskTrackingApp.Models
         public Priority Priority { get; set; }//Trivial, minor, major, critical, blocker
 
         [ForeignKey("Developer")]
-        public int DevID { get; set; }
+        public int? DevID { get; set; }
         public virtual Developer Developer { get; set; }
 
     }
