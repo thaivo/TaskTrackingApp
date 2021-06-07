@@ -10,9 +10,9 @@ namespace TaskTrackingApp.Models
     {
         [Key]
         public int DevID { get; set; }
-        public string fname { get; set; }
-        public string lname { get; set; }
-        public string position { get; set; }
+        public string DeveloperFirstName { get; set; }
+        public string DeveloperLastName { get; set; }
+        public string DeveloperPosition { get; set; }
         
         public ICollection<Assignment> Assignments { get; set; }
         public ICollection<Skill> Skills { get; set; }
@@ -20,11 +20,11 @@ namespace TaskTrackingApp.Models
     }
 
     //DTO
-    /*public class DeveloperDto
+    public class DeveloperDto
     {
         public int DevID { get; set; }
-        public string fname { get; set; }
-        public string lname { get; set; }
-        public string position { get; set; }
-    }*/
+        public string DeveloperFirstName { get; set; }
+        public string DeveloperLastName { get; set; }
+        public string DeveloperPosition { get; set; }
+    }
 }
