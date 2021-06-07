@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create a Developer</h2>
+<form action="/Developer/Create" method="POST">
+    <div>
+        <label>First name:</label><input type="text" name="fname" />
+    </div>
+    <div>
+        <label>Last name:</label><input type="text" name="lname" />
+    </div>
+    <div>
+        <label>Position:</label><input type="text" name="position" />
+    </div>
+    <div>
+        <input type="submit" value="Add developer" />
+    </div>
+
+    <!--
+    /Skill/AssociateSkillWithDeveloper/DeveloperID/SkillID
+    /Skill/UnassociateSkillWithDeveloper/DeveloperID/SkillID
+    /Assignment/AssignTaskToDeveloper/DeveloperID/AssignmentID
+    -->
+</form>

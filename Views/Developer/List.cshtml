@@ -1,0 +1,13 @@
+﻿@model IEnumerable<TaskTrackingApp.Models.DeveloperDto>
+@{
+    ViewBag.Title = "List";
+}
+
+
+
+<h2>List</h2>
+@foreach(var developer in Model)
+            {
+                <h2><a href="/Developer/Details/@developer.DevID">@developer.DeveloperFirstName @developer.DeveloperLastName</a></h2>
+                <div>@developer.DeveloperPosition</div>
+            }
