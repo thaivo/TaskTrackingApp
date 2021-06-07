@@ -34,6 +34,16 @@ namespace TaskTrackingApp.Models
         [ForeignKey("Developer")]
         public int? DevID { get; set; }
         public virtual Developer Developer { get; set; }
+    }
 
+    public class AssignmentDto
+    {
+        public int AssignmentID { get; set; }
+        public string AssignmentDesc { get; set; }
+        public Status Status { get; set; }
+        public Priority Priority { get; set; }
+        public int DevID { get; set; }
+        public string DeveloperFirstName { get; set; }
+        public string DeveloperLastName { get; set; }
     }
 }
