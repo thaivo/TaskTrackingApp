@@ -1,0 +1,15 @@
+﻿@model IEnumerable<TaskTrackingApp.Models.AssignmentDto>
+@{
+    ViewBag.Title = "List";
+}
+<a href="/Assignment/New">Create a new assignment</a>
+<h2>List</h2>
+@foreach (var assignment in Model)
+{
+    <h2><a href="/Assignment/Details/@assignment.AssignmentID">@assignment.AssignmentDesc</a></h2>
+    if (assignment.DevID != 0)
+    {
+        <div>Assignee: <a href="/Developer/Details/@assignment.DevID">@assignment.DeveloperFirstName @assignment.DeveloperLastName</a> </div>
+    }
+
+}
