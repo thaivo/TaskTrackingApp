@@ -18,10 +18,19 @@ namespace TaskTrackingApp.Controllers
 
         // GET: api/DeveloperData/ListDevelopers
         [HttpGet]
-        public IEnumerable<Developer> ListDevelopers()
+        public IHttpActionResult ListDevelopers()
         {
         	List<Developer> Developers = db.Developers.ToList();
-            return Developers;
+            List<DeveloperDto> DeveloperDtos = new List<DeveloperDto>();
+
+            Developers.ForEach(d => DeveloperDtos.Add(new DeveloperDto()
+            {
+                DevID = d.DevID,
+                DeveloperFirstName = d.DeveloperFirstName,
+                DeveloperLastName = d.DeveloperLastName,
+                DeveloperPosition = d.DeveloperPosition
+            }));
+            return Ok(DeveloperDtos);
         }
 
         // GET: api/DeveloperData/FindDeveloper/5
@@ -30,12 +39,19 @@ namespace TaskTrackingApp.Controllers
         public IHttpActionResult FindDeveloper(int id)
         {
             Developer developer = db.Developers.Find(id);
+            DeveloperDto developerDto = new DeveloperDto()
+            {
+                DevID = developer.DevID,
+                DeveloperFirstName = developer.DeveloperFirstName,
+                DeveloperLastName = developer.DeveloperLastName,
+                DeveloperPosition = developer.DeveloperPosition
+            };
             if (developer == null)
             {
                 return NotFound();
             }
 
-            return Ok(developer);
+            return Ok(developerDto);
         }
 
         // PUT: api/DeveloperData/UpdateDeveloper/5
