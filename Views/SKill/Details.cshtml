@@ -1,0 +1,15 @@
+﻿@model TaskTrackingApp.Models.ViewModels.DetailsSkill
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<p>Skill: @Model.selectedSkillDto.SkillName</p>
+<p>possessors:</p>
+@foreach(var developer in Model.relatedDeveloperDtos)
+            {
+                <a href="/Developer/Details/@developer.DevID">
+                    @developer.DeveloperFirstName @developer.DeveloperLastName
+                </a>
+            }
+

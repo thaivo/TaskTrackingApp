@@ -54,6 +54,23 @@ namespace TaskTrackingApp.Controllers
             return Ok(developerDto);
         }
 
+        [HttpGet]
+        public IHttpActionResult ListDevelopersForSkill(int id)
+        {
+            List<Developer> developers = db.Developers.Where(d => d.Skills.Any(s => s.SkillID == id)).ToList();
+            List<DeveloperDto> developerDtos = new List<DeveloperDto>();
+
+            developers.ForEach(d => developerDtos.Add(new DeveloperDto()
+            {
+                DevID = d.DevID,
+                DeveloperFirstName = d.DeveloperFirstName,
+                DeveloperLastName = d.DeveloperLastName,
+                DeveloperPosition = d.DeveloperPosition
+            }));
+            return Ok(developerDtos);
+        }
+
+
         // PUT: api/DeveloperData/UpdateDeveloper/5
         [ResponseType(typeof(void))]
         [HttpPost]

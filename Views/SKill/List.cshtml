@@ -1,0 +1,13 @@
+﻿@model IEnumerable<TaskTrackingApp.Models.SkillDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List of Skills</h2>
+@foreach(var skill in Model)
+            {
+<div>
+    <a href="/Skill/Details/@skill.SkillID">@skill.SkillName</a>
+</div>
+                
+            }

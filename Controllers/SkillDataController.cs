@@ -18,10 +18,20 @@ namespace TaskTrackingApp.Controllers
 
         // GET: api/SkillData/listskills
         [HttpGet]
-        public IQueryable<Skill> ListSkills()
+        public IHttpActionResult ListSkills()
         {
-            return db.Skills;
+            List<Skill> Skills = db.Skills.ToList();
+            List<SkillDto> SkillDtos = new List<SkillDto>();
+
+            Skills.ForEach(s => SkillDtos.Add(new SkillDto()
+            {
+                SkillID = s.SkillID,
+                SkillName = s.SkillName
+            }));
+            return Ok(SkillDtos);
         }
+
+        //public IHttpActionResult ListSkillsForDeveloper(int id)
 
         // GET: api/SkillData/FindSkill/5
         [ResponseType(typeof(Skill))]
@@ -29,12 +39,17 @@ namespace TaskTrackingApp.Controllers
         public IHttpActionResult FindSkill(int id)
         {
             Skill skill = db.Skills.Find(id);
+            SkillDto skillDto = new SkillDto()
+            {
+                SkillID = skill.SkillID,
+                SkillName = skill.SkillName
+            };
             if (skill == null)
             {
                 return NotFound();
             }
 
-            return Ok(skill);
+            return Ok(skillDto);
         }
 
         // PUT: api/SkillData/UpdateSkill/5
