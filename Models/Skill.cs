@@ -13,4 +13,10 @@ namespace TaskTrackingApp.Models
 
         public ICollection<Developer> Developers { get; set; }
     }
+
+    public class SkillDto
+    {
+        public int SkillID { get; set; }
+        public string SkillName { get; set; }
+    }
 }
