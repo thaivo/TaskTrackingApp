@@ -70,6 +70,38 @@ namespace TaskTrackingApp.Controllers
             return Ok(developerDtos);
         }
 
+        [HttpPost]
+        [Route("api/developerdata/addskillfordeveloper/{developerId}/{skillId}")]
+        public IHttpActionResult AddSkillForDeveloper(int developerId, int skillId)
+        {
+            Developer SelectedDeveloper = db.Developers.Include(d => d.Skills).Where(d => d.DevID == developerId).FirstOrDefault();
+            Skill SelectedSkill = db.Skills.Find(skillId);
+
+            if(SelectedDeveloper == null|| SelectedSkill == null)
+            {
+                return NotFound();
+            }
+
+            SelectedDeveloper.Skills.Add(SelectedSkill);
+            db.SaveChanges();
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("api/developerdata/removeskillfordeveloper/{developerid}/{skillid}")]
+        public IHttpActionResult RemoveSkillForDeveloper(int developerId, int skillId)
+        {
+            Developer selectedDeveloper = db.Developers.Include(d => d.Skills).Where(d => d.DevID == developerId).FirstOrDefault();
+            Skill selectedSkill = db.Skills.Find(skillId);
+            if(selectedDeveloper == null || selectedSkill == null)
+            {
+                return NotFound();
+            }
+            selectedDeveloper.Skills.Remove(selectedSkill);
+            db.SaveChanges();
+            return Ok();
+        }
 
         // PUT: api/DeveloperData/UpdateDeveloper/5
         [ResponseType(typeof(void))]

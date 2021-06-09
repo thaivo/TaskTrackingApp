@@ -59,7 +59,40 @@ namespace TaskTrackingApp.Controllers
             response = client.GetAsync(url).Result;
             IEnumerable<AssignmentDto> relatedAssignments = response.Content.ReadAsAsync<IEnumerable<AssignmentDto>>().Result;
             ViewModel.assignedTasks = relatedAssignments;
+
+            //TODO: load the list of skills of developer
+            url = "skilldata/listskillsdeveloperhas/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<SkillDto> possessedskills = response.Content.ReadAsAsync<IEnumerable<SkillDto>>().Result;
+            ViewModel.skillsDeveloperHas = possessedskills;
+
+            //TODO: load the list that developer does not have
+            url = "skilldata/listskillsdeveloperdoesnothave/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<SkillDto> skillsDeveloperDoesNotHave = response.Content.ReadAsAsync<IEnumerable<SkillDto>>().Result;
+            ViewModel.skillsDeveloperDoesNotHave = skillsDeveloperDoesNotHave;
+
             return View(ViewModel);
+        }
+        [HttpPost]
+        public ActionResult Add(int id, int SkillID)
+        {
+            string url = "developerdata/addskillfordeveloper/" + id + "/" + SkillID;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            return RedirectToAction("Details/" + id);
+        }
+
+        [HttpGet]
+        public ActionResult Remove(int id, int SkillID)
+        {
+            string url = "developerdata/removeskillfordeveloper/" + id + "/" + SkillID;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            return RedirectToAction("Details/" + id);
+
         }
 
         public ActionResult Error()

@@ -9,5 +9,7 @@ namespace TaskTrackingApp.Models.ViewModels
     {
         public DeveloperDto selectedDeveloper { get; set; }
         public IEnumerable<AssignmentDto> assignedTasks { get; set; }
+        public IEnumerable<SkillDto> skillsDeveloperHas { get; set; }
+        public IEnumerable<SkillDto> skillsDeveloperDoesNotHave { get; set; }
     }
 }

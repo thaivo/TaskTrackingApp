@@ -31,7 +31,33 @@ namespace TaskTrackingApp.Controllers
             return Ok(SkillDtos);
         }
 
-        //public IHttpActionResult ListSkillsForDeveloper(int id)
+        [HttpGet]
+        public IHttpActionResult ListSkillsDeveloperHas(int id)
+        {
+            List<Skill> skills = db.Skills.Where(s => s.Developers.Any(d => d.DevID == id)).ToList();
+            List<SkillDto> skillDtos = new List<SkillDto>();
+
+            skills.ForEach(s => skillDtos.Add(new SkillDto()
+            {
+                SkillID = s.SkillID,
+                SkillName = s.SkillName
+            }));
+            return Ok(skillDtos);
+        }
+
+        [HttpGet]
+        public IHttpActionResult ListSkillsDeveloperDoesNotHave(int id)
+        {
+            List<Skill> skills = db.Skills.Where(s => !s.Developers.Any(d => d.DevID == id)).ToList();
+            List<SkillDto> skillDtos = new List<SkillDto>();
+
+            skills.ForEach(s => skillDtos.Add(new SkillDto()
+            {
+                SkillID = s.SkillID,
+                SkillName = s.SkillName
+            }));
+            return Ok(skillDtos);
+        }
 
         // GET: api/SkillData/FindSkill/5
         [ResponseType(typeof(Skill))]
