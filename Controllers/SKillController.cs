@@ -51,26 +51,40 @@ namespace TaskTrackingApp.Controllers
             return View(ViewModel);
         }
 
+        public ActionResult Error()
+        {
+            return View();
+        }
+
         // GET: SKill/Create
-        public ActionResult Create()
+        public ActionResult New()
         {
             return View();
         }
 
         // POST: SKill/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Skill skill)
         {
-            try
+
+            string url = "skilldata/addskill";
+            string jsonpayload = jss.Serialize(skill);
+
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if(response.IsSuccessStatusCode)
             {
                 // TODO: Add insert logic here
 
                 return RedirectToAction("Index");
             }
-            catch
+            else
             {
-                return View();
+                return RedirectToAction("Error");
             }
+            
         }
 
         // GET: SKill/Edit/5
