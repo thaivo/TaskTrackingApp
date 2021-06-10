@@ -1,4 +1,4 @@
-﻿@model TaskTrackingApp.Models.Developer
+﻿@model TaskTrackingApp.Models.DeveloperDto
 @{
     ViewBag.Title = "Edit";
 }
@@ -9,23 +9,15 @@
         @* Pass through the animal ID *@
         <input type="text" name="DevID" value="@Model.DevID" />
     </div>
-    <!--<div>
-        <label>First name:</label> <input type="text" name="fname" value="@Model.SelectedAnimal.AnimalName" />
+    <div>
+        <label>First name:</label> <input type="text" name="DeveloperFirstName" value="@Model.DeveloperFirstName" />
     </div>
     <div>
-        <label>Weight (kg):</label> <input type="number" name="AnimalWeight" value="@Model.SelectedAnimal.AnimalWeight" />
+        <label>Last name:</label> <input type="text" name="DeveloperLastName" value="@Model.DeveloperLastName" />
     </div>
     <div>
-        <label>Species ID:</label>
-
-        <select name="SpeciesID">
-
-                <option value="@species.SpeciesID">@species.SpeciesName</option>
-
-            }
-        </select>
+        <label>Position:</label> <input type="text" name="DeveloperPosition" value="@Model.DeveloperPosition" />
     </div>
-        -->
     <div>
         <input type="submit" value="Update Developer" />
 

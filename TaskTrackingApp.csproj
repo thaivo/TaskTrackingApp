@@ -307,6 +307,7 @@
     <Content Include="Views\Assignment\Details.cshtml" />
     <Content Include="Views\SKill\List.cshtml" />
     <Content Include="Views\SKill\Details.cshtml" />
+    <Content Include="Views\SKill\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

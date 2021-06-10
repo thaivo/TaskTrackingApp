@@ -140,7 +140,7 @@ namespace TaskTrackingApp.Controllers
         {
             string url = "developerdata/finddeveloper/"+id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-            Developer selectedDeveloper = response.Content.ReadAsAsync<Developer>().Result;
+            DeveloperDto selectedDeveloper = response.Content.ReadAsAsync<DeveloperDto>().Result;
             return View(selectedDeveloper);
         }
 
@@ -151,7 +151,7 @@ namespace TaskTrackingApp.Controllers
             string url = "developerdata/updatedeveloper/" + id;
             string jsonPayload = jss.Serialize(developer);
             HttpContent content = new StringContent(jsonPayload);
-            content.Headers.ContentType.MediaType = "applicationType/json";
+            content.Headers.ContentType.MediaType = "application/json";
 
             HttpResponseMessage response = client.PostAsync(url, content).Result;
             if (response.IsSuccessStatusCode)
