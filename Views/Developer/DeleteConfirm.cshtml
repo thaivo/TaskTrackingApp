@@ -1,0 +1,14 @@
+﻿@model TaskTrackingApp.Models.DeveloperDto
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+<h2>Are you sure you want to delete this animal?</h2>
+<a href="/Developer/List">Cancel</a>
+<h2>@Model.DeveloperFirstName @Model.DeveloperLastName</h2>
+<div>Position: @Model.DeveloperPosition</div>
+
+<form action="/Developer/Delete/@Model.DevID" method="POST">
+    <input type="submit" value="Confirm Delete" />
+
+</form>

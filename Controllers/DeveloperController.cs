@@ -165,24 +165,30 @@ namespace TaskTrackingApp.Controllers
         }
 
         // GET: Developer/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteConfirm(int id)
         {
-            return View();
+            string url = "developerdata/finddeveloper/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            DeveloperDto developerDto = response.Content.ReadAsAsync<DeveloperDto>().Result;
+            return View(developerDto);
         }
 
         // POST: Developer/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            string url = "developerdata/deletedeveloper/" + id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
     }
