@@ -1,0 +1,15 @@
+﻿@model TaskTrackingApp.Models.SkillDto
+@{
+    ViewBag.Title = "Edit";
+}
+<a href="/Skill/Details/@Model.SkillID">Back to details</a>
+<h2>Update skill</h2>
+<form action="/Skill/Update/@Model.SkillID" method="POST">
+    <div>
+        <label>Skill name:</label> <input type="text" name="SkillName" value="@Model.SkillName" />
+    </div>
+    <div>
+        <input type="submit" value="Update Skill" />
+
+    </div>
+</form>

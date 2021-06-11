@@ -1,0 +1,14 @@
+﻿@model TaskTrackingApp.Models.SkillDto
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+<h2>Are you sure you want to delete this skill?</h2>
+<a href="/Skill/List">Cancel</a>
+<h2>@Model.SkillName</h2>
+
+
+<form action="/Skill/Delete/@Model.SkillID" method="POST">
+    <input type="submit" value="Confirm Delete" />
+
+</form>
