@@ -116,6 +116,7 @@ namespace TaskTrackingApp.Controllers
 
         // POST: api/AssignmentData
         [ResponseType(typeof(Assignment))]
+        [HttpPost]
         public IHttpActionResult AddAssignment(Assignment assignment)
         {
             if (!ModelState.IsValid)
@@ -131,6 +132,7 @@ namespace TaskTrackingApp.Controllers
 
         // DELETE: api/AssignmentData/5
         [ResponseType(typeof(Assignment))]
+        [HttpPost]
         public IHttpActionResult DeleteAssignment(int id)
         {
             Assignment assignment = db.Assignments.Find(id);

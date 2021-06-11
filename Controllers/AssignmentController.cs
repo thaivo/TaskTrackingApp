@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using TaskTrackingApp.Models;
+using TaskTrackingApp.Models.ViewModels;
 
 namespace TaskTrackingApp.Controllers
 {
@@ -98,44 +99,65 @@ namespace TaskTrackingApp.Controllers
         // GET: Assignment/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            UpdateAssignment ViewModel = new UpdateAssignment();
+            string url = "assignmentdata/findassignment/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            AssignmentDto selectedAssignment = response.Content.ReadAsAsync<AssignmentDto>().Result;
+            ViewModel.relatedAssignment = selectedAssignment;
+
+            url = "developerdata/listdevelopers";
+            response = client.GetAsync(url).Result;
+            IEnumerable<DeveloperDto> developerDtos = response.Content.ReadAsAsync<IEnumerable<DeveloperDto>>().Result;
+            ViewModel.developerDtos = developerDtos;
+
+            return View(ViewModel);
         }
 
         // POST: Assignment/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Update(int id, Assignment assignment)
         {
-            try
-            {
-                // TODO: Add update logic here
+            string url = "assignmentdata/updateassignment/" + id;
+            string jsonPayload = jss.Serialize(assignment);
+            HttpContent content = new StringContent(jsonPayload);
+            content.Headers.ContentType.MediaType = "application/json";
 
-                return RedirectToAction("Index");
-            }
-            catch
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
 
         // GET: Assignment/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteConfirm(int id)
         {
-            return View();
+            string url = "assignmentdata/findassignment/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            AssignmentDto assignmentDto = response.Content.ReadAsAsync<AssignmentDto>().Result;
+            return View(assignmentDto);
         }
 
         // POST: Assignment/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            string url = "assignmentdata/deleteassignment/" + id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
     }

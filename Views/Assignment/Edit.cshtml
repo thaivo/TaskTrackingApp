@@ -1,0 +1,70 @@
+﻿@model TaskTrackingApp.Models.ViewModels.UpdateAssignment
+@{
+    ViewBag.Title = "Edit";
+    String[] statuses = { "Open", "In Progress", "Resolved", "Reopened", "Closed"};
+    String[] priorities = { "Trivial", "Minor", "Major", "Critical", "Blocker" };
+}
+
+<h2>Update assignment</h2>
+<form action="/Assignment/Update/@Model.relatedAssignment.AssignmentID" method="POST">
+    <div>
+        <label>Description:</label> <input type="text" name="AssignmentDesc" value="@Model.relatedAssignment.AssignmentDesc"/>
+    </div>
+    <div>
+        <label>Status:</label>
+        <select name="Status">
+            @for (var i = 0; i < @statuses.Length; i++)
+            {
+                string selected = "";
+                if (i == (int)Model.relatedAssignment.Status)
+                {
+                    selected = "selected";
+                }
+                <option value="@Model.relatedAssignment.Status" @selected>@statuses[i]</option>
+            }
+            <!--<option value="0">Open</option>
+    <option value="1">InProgress</option>
+    <option value="2">Resolved</option>
+    <option value="3">Reopened</option>
+    <option value="4">Closed</option>-->
+        </select>
+    </div>
+    <div>
+        <label>Priority:</label>
+        <select name="Priority">
+            @for (var i = 0; i < priorities.Length; i++)
+            {
+                string selected = "";
+                if (i == (int)Model.relatedAssignment.Priority)
+                {
+                    selected = "selected";
+                }
+                <option value="@Model.relatedAssignment.Priority" @selected>@priorities[i]</option>
+            }
+            <!--<option value="0">Trivial</option>
+    <option value="1">Minor</option>
+    <option value="2">Major</option>
+    <option value="3">Critical</option>
+    <option value="4">Blocker</option>
+        -->
+        </select>
+    </div>
+    <div>
+        <label>Developers:</label>
+        <select name="DevID">
+            <option value="0"></option>
+            @foreach (var developer in Model.developerDtos)
+            {
+                string selected = "";
+                if(Model.relatedAssignment.DevID == developer.DevID)
+                {
+                    selected = "selected";
+                }
+                <option value="@developer.DevID" @selected>@developer.DeveloperFirstName @developer.DeveloperLastName (@developer.DeveloperPosition)</option>
+            }
+        </select>
+    </div>
+    <div>
+        <input type="submit" value="Add Assignment" />
+    </div>
+</form>
