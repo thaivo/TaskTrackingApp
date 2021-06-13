@@ -72,6 +72,7 @@ namespace TaskTrackingApp.Controllers
 
         [HttpPost]
         [Route("api/developerdata/addskillfordeveloper/{developerId}/{skillId}")]
+        [Authorize]
         public IHttpActionResult AddSkillForDeveloper(int developerId, int skillId)
         {
             Developer SelectedDeveloper = db.Developers.Include(d => d.Skills).Where(d => d.DevID == developerId).FirstOrDefault();
@@ -90,6 +91,7 @@ namespace TaskTrackingApp.Controllers
 
         [HttpPost]
         [Route("api/developerdata/removeskillfordeveloper/{developerid}/{skillid}")]
+        [Authorize]
         public IHttpActionResult RemoveSkillForDeveloper(int developerId, int skillId)
         {
             Developer selectedDeveloper = db.Developers.Include(d => d.Skills).Where(d => d.DevID == developerId).FirstOrDefault();
@@ -106,6 +108,7 @@ namespace TaskTrackingApp.Controllers
         // PUT: api/DeveloperData/UpdateDeveloper/5
         [ResponseType(typeof(void))]
         [HttpPost]
+        [Authorize]
         public IHttpActionResult UpdateDeveloper(int id, Developer developer)
         {
             if (!ModelState.IsValid)
@@ -142,6 +145,7 @@ namespace TaskTrackingApp.Controllers
         // POST: api/DeveloperData/AddDeveloper
         [ResponseType(typeof(Developer))]
         [HttpPost]
+        [Authorize]
         public IHttpActionResult AddDeveloper(Developer developer)
         {
             if (!ModelState.IsValid)
@@ -158,6 +162,7 @@ namespace TaskTrackingApp.Controllers
         // DELETE: api/DeveloperData/DeleteDeveloper/5
         [ResponseType(typeof(Developer))]
         [HttpPost]
+        [Authorize]
         public IHttpActionResult DeleteDeveloper(int id)
         {
             Developer developer = db.Developers.Find(id);

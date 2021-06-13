@@ -75,6 +75,7 @@ namespace TaskTrackingApp.Controllers
             return View(ViewModel);
         }
         [HttpPost]
+        [Authorize]
         public ActionResult Add(int id, int SkillID)
         {
             string url = "developerdata/addskillfordeveloper/" + id + "/" + SkillID;
@@ -85,6 +86,7 @@ namespace TaskTrackingApp.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Remove(int id, int SkillID)
         {
             string url = "developerdata/removeskillfordeveloper/" + id + "/" + SkillID;
@@ -101,6 +103,7 @@ namespace TaskTrackingApp.Controllers
         }
 
         // GET: Developer/New
+        [Authorize]
         public ActionResult New()
         {
             return View();
@@ -108,6 +111,7 @@ namespace TaskTrackingApp.Controllers
 
         // POST: Developer/Create
         [HttpPost]
+        [Authorize]
         public ActionResult Create(Developer developer)
         {
             Debug.WriteLine("Developer: " + developer.DeveloperFirstName + " " + developer.DeveloperLastName);
@@ -136,6 +140,7 @@ namespace TaskTrackingApp.Controllers
         }
 
         // GET: Developer/Edit/5
+        [Authorize]
         public ActionResult Edit(int id)
         {
             string url = "developerdata/finddeveloper/"+id;
@@ -146,6 +151,7 @@ namespace TaskTrackingApp.Controllers
 
         // POST: Developer/Edit/5
         [HttpPost]
+        [Authorize]
         public ActionResult Update(int id, Developer developer)
         {
             string url = "developerdata/updatedeveloper/" + id;
@@ -165,6 +171,7 @@ namespace TaskTrackingApp.Controllers
         }
 
         // GET: Developer/Delete/5
+        [Authorize]
         public ActionResult DeleteConfirm(int id)
         {
             string url = "developerdata/finddeveloper/" + id;
@@ -175,6 +182,7 @@ namespace TaskTrackingApp.Controllers
 
         // POST: Developer/Delete/5
         [HttpPost]
+        [Authorize]
         public ActionResult Delete(int id)
         {
             string url = "developerdata/deletedeveloper/" + id;
