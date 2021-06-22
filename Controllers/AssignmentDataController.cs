@@ -15,9 +15,18 @@ namespace TaskTrackingApp.Controllers
     public class AssignmentDataController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-        // GET: api/AssignmentData
+        /// <summary>
+        /// Return all assignments.
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: all assignments in the database, including their associated developers.
+        /// </returns>
+        /// <example>
+        /// GET: api/AssignmentData/ListAssignments
+        /// </example>
         [HttpGet]
+        [ResponseType(typeof(AssignmentDto))]
         public IHttpActionResult ListAssignments()
         {
             List<Assignment> assignments = db.Assignments.ToList();
@@ -35,7 +44,19 @@ namespace TaskTrackingApp.Controllers
             return Ok(assignmentDtos);
         }
 
+        /// <summary>
+        /// Return all assignments of a developer
+        /// </summary>
+        /// <param name="id">a developer id</param>
+        /// <returns>
+        /// /// HEADER: 200 (OK)
+        /// CONTENT: all assignments of a developer in the database
+        /// </returns>
+        /// <example>
+        /// GET: api/AssignmentData/ListAssignmentsForDeveloper/1
+        /// </example>
         [HttpGet]
+        [ResponseType(typeof(AssignmentDto))]
         public IHttpActionResult ListAssignmentsForDeveloper(int id)
         {
             List<Assignment> assignments = db.Assignments.Where(a => a.DevID == id).ToList();
@@ -54,7 +75,20 @@ namespace TaskTrackingApp.Controllers
             return Ok(assignmentDtos);
         }
 
-        // GET: api/AssignmentData/5
+
+        /// <summary>
+        /// Find an assignment based on its id.
+        /// </summary>
+        /// <param name="id">an assignment id</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: an assignment in the database
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// GET: api/AssignmentData/FindAssignment/1
+        /// </example>
         [ResponseType(typeof(Assignment))]
         [HttpGet]
         public IHttpActionResult FindAssignment(int id)
@@ -78,7 +112,23 @@ namespace TaskTrackingApp.Controllers
             return Ok(assignmentDto);
         }
 
-        // PUT: api/AssignmentData/5
+        /// <summary>
+        /// Updates a particular assignment in the system with POST Data input
+        /// </summary>
+        /// <param name="id">Represents the assignment ID primary key</param>
+        /// <param name="assignment">JSON FORM DATA of an assignment</param>
+        /// <returns>
+        /// HEADER: 204 (Success, No Content Response)
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// or
+        /// HEADER: 404 (Not Found)
+        /// </returns>
+        /// <example>
+        /// POST: api/AssignmentData/UpdateAssignment/5
+        /// FORM DATA: Animal JSON Object
+        /// </example>
+        [ResponseType(typeof(void))]
         [ResponseType(typeof(void))]
         [HttpPost]
         public IHttpActionResult UpdateAssignment(int id, Assignment assignment)
@@ -114,7 +164,20 @@ namespace TaskTrackingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/AssignmentData
+        /// <summary>
+        /// Adds an assignment to the system
+        /// </summary>
+        /// <param name="assignment">JSON FORM DATA of an assignment</param>
+        /// <returns>
+        /// HEADER: 201 (Created)
+        /// CONTENT: Assignment Data
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// </returns>
+        /// <example>
+        /// POST: api/AssignmentData/AddAssignment
+        /// FORM DATA: Assignment JSON Object
+        /// </example>
         [ResponseType(typeof(Assignment))]
         [HttpPost]
         public IHttpActionResult AddAssignment(Assignment assignment)
@@ -130,7 +193,19 @@ namespace TaskTrackingApp.Controllers
             return CreatedAtRoute("DefaultApi", new { id = assignment.AssignmentID }, assignment);
         }
 
-        // DELETE: api/AssignmentData/5
+        /// <summary>
+        /// Deletes an assignment from the system by it's ID.
+        /// </summary>
+        /// <param name="id">The primary key of the assignment</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST: api/AssignmentData/DeleteAssignment/5
+        /// FORM DATA: (empty)
+        /// </example>
         [ResponseType(typeof(Assignment))]
         [HttpPost]
         public IHttpActionResult DeleteAssignment(int id)
