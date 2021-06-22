@@ -16,7 +16,17 @@ namespace TaskTrackingApp.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/SkillData/listskills
+        /// <summary>
+        /// Returns all skills in the system.
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: all skills in the database.
+        /// </returns>
+        /// <example>
+        /// GET: api/SkillData/ListSkills
+        /// </example>
+        [ResponseType(typeof(SkillDto))]
         [HttpGet]
         public IHttpActionResult ListSkills()
         {
@@ -31,6 +41,17 @@ namespace TaskTrackingApp.Controllers
             return Ok(SkillDtos);
         }
 
+        /// <summary>
+        /// Return skills of a particular developer based on developer's id.
+        /// </summary>
+        /// <param name="id">a developer ID primary key</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: all skills of a particular developer in the database.
+        /// </returns>
+        /// <example>
+        /// GET: api/SkillData/ListSkillsDeveloperHas/1
+        /// </example>
         [HttpGet]
         public IHttpActionResult ListSkillsDeveloperHas(int id)
         {
@@ -45,6 +66,17 @@ namespace TaskTrackingApp.Controllers
             return Ok(skillDtos);
         }
 
+        /// <summary>
+        /// Returns Skills that a particular developer does not have.
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: all Skills in the database that a particular developer does not have.
+        /// </returns>
+        /// <param name="id">Developer Primary Key</param>
+        /// <example>
+        /// GET: api/SkillData/ListSkillsDeveloperDoesNotHave/1
+        /// </example>
         [HttpGet]
         public IHttpActionResult ListSkillsDeveloperDoesNotHave(int id)
         {
@@ -59,8 +91,20 @@ namespace TaskTrackingApp.Controllers
             return Ok(skillDtos);
         }
 
-        // GET: api/SkillData/FindSkill/5
-        [ResponseType(typeof(Skill))]
+        /// <summary>
+        /// Find a skill based on its id.
+        /// </summary>
+        /// <param name="id">a skill id</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: a skill in the database
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// GET: api/SkillData/FindSkill/5
+        /// </example>
+        [ResponseType(typeof(SkillDto))]
         [HttpGet]
         public IHttpActionResult FindSkill(int id)
         {
@@ -78,7 +122,22 @@ namespace TaskTrackingApp.Controllers
             return Ok(skillDto);
         }
 
-        // PUT: api/SkillData/UpdateSkill/5
+        /// <summary>
+        /// Updates a particular skill in the system with POST Data input
+        /// </summary>
+        /// <param name="id">Represents the Skill ID primary key</param>
+        /// <param name="developer">JSON FORM DATA of a skill</param>
+        /// <returns>
+        /// HEADER: 204 (Success, No Content Response)
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// or
+        /// HEADER: 404 (Not Found)
+        /// </returns>
+        /// <example>
+        /// POST: api/SkillData/UpdateSkill/5
+        /// FORM DATA: Skill JSON Object
+        /// </example>
         [ResponseType(typeof(void))]
         [HttpPost]
         public IHttpActionResult UpdateSkill(int id, Skill skill)
@@ -114,7 +173,20 @@ namespace TaskTrackingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/SkillData/AddSkill
+        /// <summary>
+        /// Adds a skill to the system
+        /// </summary>
+        /// <param name="skill">JSON FORM DATA of a skill</param>
+        /// <returns>
+        /// HEADER: 201 (Created)
+        /// CONTENT: Skill Data
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// </returns>
+        /// <example>
+        /// POST: api/SkillData/AddSkill
+        /// FORM DATA: Skill JSON Object
+        /// </example>
         [ResponseType(typeof(Skill))]
         [HttpPost]
         public IHttpActionResult AddSkill(Skill skill)
@@ -130,7 +202,19 @@ namespace TaskTrackingApp.Controllers
             return CreatedAtRoute("DefaultApi", new { id = skill.SkillID }, skill);
         }
 
-        // DELETE: api/SkillData/DeleteSkill/5
+        /// <summary>
+        /// Deletes a skill from the system by it's ID.
+        /// </summary>
+        /// <param name="id">The primary key of the skill</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST: api/SkillData/DeleteSkill/5
+        /// FORM DATA: (empty)
+        /// </example>
         [ResponseType(typeof(Skill))]
         [HttpPost]
         public IHttpActionResult DeleteSkill(int id)
