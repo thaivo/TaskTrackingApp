@@ -16,7 +16,17 @@ namespace TaskTrackingApp.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/DeveloperData/ListDevelopers
+        /// <summary>
+        /// Returns all Developers in the system.
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: all Developers in the database.
+        /// </returns>
+        /// <example>
+        /// GET: api/DeveloperData/ListDevelopers
+        /// </example>
+        [ResponseType(typeof(DeveloperDto))]
         [HttpGet]
         public IHttpActionResult ListDevelopers()
         {
@@ -33,7 +43,19 @@ namespace TaskTrackingApp.Controllers
             return Ok(DeveloperDtos);
         }
 
-        // GET: api/DeveloperData/FindDeveloper/5
+        /// <summary>
+        /// Find a developer based on its id.
+        /// </summary>
+        /// <param name="id">a developer id</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: a developer in the database
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// GET: api/DeveloperData/FindDeveloper/1
+        /// </example>
         [ResponseType(typeof(Developer))]
         [HttpGet]
         public IHttpActionResult FindDeveloper(int id)
@@ -54,6 +76,18 @@ namespace TaskTrackingApp.Controllers
             return Ok(developerDto);
         }
 
+        /// <summary>
+        /// Return all developers those who have a skill
+        /// </summary>
+        /// <param name="id">a skill id</param>
+        /// <returns>
+        /// /// HEADER: 200 (OK)
+        /// CONTENT: all developers those who have a skill in the database.
+        /// </returns>
+        /// <example>
+        /// GET: api/DeveloperData/ListDevelopersForSkill/1
+        /// </example>
+        [ResponseType(typeof(DeveloperDto))]
         [HttpGet]
         public IHttpActionResult ListDevelopersForSkill(int id)
         {
@@ -70,6 +104,19 @@ namespace TaskTrackingApp.Controllers
             return Ok(developerDtos);
         }
 
+        /// <summary>
+        /// Adds a particular skill for a developer
+        /// </summary>
+        /// <param name="developerId">The developer ID primary key</param>
+        /// <param name="skillId">The skill ID primary key</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST api/DeveloperData/AddSkillForDeveloper/9/1
+        /// </example>
         [HttpPost]
         [Route("api/developerdata/addskillfordeveloper/{developerId}/{skillId}")]
         [Authorize]
@@ -89,6 +136,19 @@ namespace TaskTrackingApp.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Removes a particular skill from a particular developer
+        /// </summary>
+        /// <param name="developerId">The developer ID primary key</param>
+        /// <param name="skillId">The skill ID primary key</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST api/DeveloperData/RemoveSkillForDeveloper/9/1
+        /// </example>
         [HttpPost]
         [Route("api/developerdata/removeskillfordeveloper/{developerid}/{skillid}")]
         [Authorize]
@@ -105,7 +165,23 @@ namespace TaskTrackingApp.Controllers
             return Ok();
         }
 
-        // PUT: api/DeveloperData/UpdateDeveloper/5
+
+        /// <summary>
+        /// Updates a particular developer in the system with POST Data input
+        /// </summary>
+        /// <param name="id">Represents the Developer ID primary key</param>
+        /// <param name="developer">JSON FORM DATA of a developer</param>
+        /// <returns>
+        /// HEADER: 204 (Success, No Content Response)
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// or
+        /// HEADER: 404 (Not Found)
+        /// </returns>
+        /// <example>
+        /// POST: api/DeveloperData/UpdateDeveloper/5
+        /// FORM DATA: Animal JSON Object
+        /// </example>
         [ResponseType(typeof(void))]
         [HttpPost]
         [Authorize]
@@ -142,7 +218,20 @@ namespace TaskTrackingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/DeveloperData/AddDeveloper
+        /// <summary>
+        /// Adds a developer to the system
+        /// </summary>
+        /// <param name="developer">JSON FORM DATA of a developer</param>
+        /// <returns>
+        /// HEADER: 201 (Created)
+        /// CONTENT: Developer Data
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// </returns>
+        /// <example>
+        /// POST: api/DeveloperData/AddDeveloper
+        /// FORM DATA: Developer JSON Object
+        /// </example>
         [ResponseType(typeof(Developer))]
         [HttpPost]
         [Authorize]
@@ -159,7 +248,19 @@ namespace TaskTrackingApp.Controllers
             return CreatedAtRoute("DefaultApi", new { id = developer.DevID }, developer);
         }
 
-        // DELETE: api/DeveloperData/DeleteDeveloper/5
+        /// <summary>
+        /// Deletes a developer from the system by it's ID.
+        /// </summary>
+        /// <param name="id">The primary key of the developer</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST: api/DeveloperData/DeleteDeveloper/5
+        /// FORM DATA: (empty)
+        /// </example>
         [ResponseType(typeof(Developer))]
         [HttpPost]
         [Authorize]
