@@ -60,6 +60,7 @@ namespace TaskTrackingApp.Controllers
         }
 
         // GET: Assignment/Create
+        [Authorize]
         public ActionResult New()
         {
             //information about all developers in the project.
@@ -74,6 +75,7 @@ namespace TaskTrackingApp.Controllers
 
         // POST: Assignment/Create
         [HttpPost]
+        [Authorize]
         public ActionResult Create(Assignment assignment)
         {
             string url = "assignmentdata/addassignment";
@@ -97,6 +99,7 @@ namespace TaskTrackingApp.Controllers
         }
 
         // GET: Assignment/Edit/5
+        [Authorize]
         public ActionResult Edit(int id)
         {
             UpdateAssignment ViewModel = new UpdateAssignment();
@@ -115,6 +118,7 @@ namespace TaskTrackingApp.Controllers
 
         // POST: Assignment/Edit/5
         [HttpPost]
+        [Authorize]
         public ActionResult Update(int id, Assignment assignment)
         {
             string url = "assignmentdata/updateassignment/" + id;
@@ -134,6 +138,7 @@ namespace TaskTrackingApp.Controllers
         }
 
         // GET: Assignment/Delete/5
+        [Authorize]
         public ActionResult DeleteConfirm(int id)
         {
             string url = "assignmentdata/findassignment/" + id;
@@ -144,6 +149,7 @@ namespace TaskTrackingApp.Controllers
 
         // POST: Assignment/Delete/5
         [HttpPost]
+        [Authorize]
         public ActionResult Delete(int id)
         {
             string url = "assignmentdata/deleteassignment/" + id;
