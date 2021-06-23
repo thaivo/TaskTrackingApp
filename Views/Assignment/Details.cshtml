@@ -1,42 +1,6 @@
 ﻿@model TaskTrackingApp.Models.AssignmentDto
 @{
     ViewBag.Title = "Details";
-    string CurrentStatus = "Open";
-    string CurrentPriority = "Trivial";
-    if ((int)@Model.Status == 1)
-    {
-        CurrentStatus = "In progress";
-    }
-    else if ((int)@Model.Status == 2)
-    {
-        CurrentStatus = "Resolved";
-    }
-    else if ((int)@Model.Status == 3)
-    {
-        CurrentStatus = "Reopened";
-    }
-    else if ((int)@Model.Status == 4)
-    {
-        CurrentStatus = "Closed";
-    }
-
-
-    if ((int)@Model.Priority == 1)
-    {
-        CurrentPriority = "Minor";
-    }
-    else if ((int)@Model.Priority == 2)
-    {
-        CurrentPriority = "Major";
-    }
-    else if ((int)@Model.Priority == 3)
-    {
-        CurrentPriority = "Critical";
-    }
-    else if ((int)@Model.Priority == 4)
-    {
-        CurrentPriority = "Blocker";
-    }
 }
 <a href="/Assignment/Edit/@Model.AssignmentID">Update</a>
 <a href="/Assignment/DeleteConfirm/@Model.AssignmentID">Delete</a>
@@ -44,5 +8,5 @@
 <p>Description: @Model.AssignmentDesc</p>
 <p>Assignee: @Model.DeveloperFirstName @Model.DeveloperLastName</p>
 
-<p>Status: @CurrentStatus</p>
-<p>Priority: @CurrentPriority</p>
+<p>Status: @Model.StatusStr</p>
+<p>Priority: @Model.PriorityStr</p>

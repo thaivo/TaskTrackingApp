@@ -4,53 +4,6 @@
     
 }
 
-@functions{
-    public string getStatus(int status)
-    {
-        string CurrentStatus = "Open";
-
-        if (status == 1)
-        {
-            CurrentStatus = "In progress";
-        }
-        else if (status == 2)
-        {
-            CurrentStatus = "Resolved";
-        }
-        else if (status == 3)
-        {
-            CurrentStatus = "Reopened";
-        }
-        else if (status == 4)
-        {
-            CurrentStatus = "Closed";
-        }
-
-        return CurrentStatus;
-
-    }
-    public string getPriority(int priority)
-    {
-        string CurrentPriority = "Trivial";
-        if (priority == 1)
-        {
-            CurrentPriority = "Minor";
-        }
-        else if (priority == 2)
-        {
-            CurrentPriority = "Major";
-        }
-        else if (priority == 3)
-        {
-            CurrentPriority = "Critical";
-        }
-        else if (priority == 4)
-        {
-            CurrentPriority = "Blocker";
-        }
-        return CurrentPriority;
-    }
-}
 <h2>Details of a developer</h2>
 <a href="/Developer/Edit/@Model.selectedDeveloper.DevID">Update</a>
 <a href="/Developer/DeleteConfirm/@Model.selectedDeveloper.DevID">Delete</a>
@@ -89,15 +42,16 @@
     </thead>
     <tbody>
         @{
-            int i = 0;
+            int i = 1;
             foreach (var task in Model.assignedTasks)
             {
                 <tr>
-                    <td>@(i+1)</td>
+                    <td>@(i)</td>
                     <td>@task.AssignmentDesc</td>
-                    <td>@getPriority((int)task.Priority)</td>
-                    <td>@getStatus((int)task.Status)</td>
+                    <td>@task.PriorityStr</td>
+                    <td>@task.StatusStr</td>
                 </tr>
+                i++;
 
             }
         }

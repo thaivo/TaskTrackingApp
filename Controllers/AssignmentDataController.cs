@@ -31,16 +31,7 @@ namespace TaskTrackingApp.Controllers
         {
             List<Assignment> assignments = db.Assignments.ToList();
             List<AssignmentDto> assignmentDtos = new List<AssignmentDto>();
-            assignments.ForEach(a => assignmentDtos.Add(new AssignmentDto()
-            {
-                AssignmentID = a.AssignmentID,
-                AssignmentDesc = a.AssignmentDesc,
-                Priority = a.Priority,
-                Status = a.Status,
-                DevID = (a.Developer != null)?(int)a.DevID:0,
-                DeveloperFirstName = (a.Developer != null) ? a.Developer.DeveloperFirstName : "",
-                DeveloperLastName = (a.Developer != null)?a.Developer.DeveloperLastName:""
-            }));
+            assignments.ForEach(a => assignmentDtos.Add(new AssignmentDto(a.AssignmentID, a.AssignmentDesc, a.Status, a.Priority,a.Developer)));
             return Ok(assignmentDtos);
         }
 
@@ -62,16 +53,7 @@ namespace TaskTrackingApp.Controllers
             List<Assignment> assignments = db.Assignments.Where(a => a.DevID == id).ToList();
             List<AssignmentDto> assignmentDtos = new List<AssignmentDto>();
 
-            assignments.ForEach(a => assignmentDtos.Add(new AssignmentDto()
-            {
-                AssignmentID = a.AssignmentID,
-                AssignmentDesc = a.AssignmentDesc,
-                DevID = (int)a.DevID,
-                DeveloperFirstName = a.Developer.DeveloperFirstName,
-                DeveloperLastName = a.Developer.DeveloperLastName,
-                Priority = a.Priority,
-                Status = a.Status
-            }));
+            assignments.ForEach(a => assignmentDtos.Add(new AssignmentDto(a.AssignmentID, a.AssignmentDesc, a.Status, a.Priority, a.Developer)));
             return Ok(assignmentDtos);
         }
 
@@ -94,16 +76,7 @@ namespace TaskTrackingApp.Controllers
         public IHttpActionResult FindAssignment(int id)
         {
             Assignment assignment = db.Assignments.Find(id);
-            AssignmentDto assignmentDto = new AssignmentDto()
-            {
-                AssignmentID = assignment.AssignmentID,
-                AssignmentDesc = assignment.AssignmentDesc,
-                Priority = assignment.Priority,
-                Status = assignment.Status,
-                DevID = (assignment.Developer != null) ? (int)assignment.DevID : 0,
-                DeveloperFirstName = (assignment.Developer != null) ? assignment.Developer.DeveloperFirstName : "",
-                DeveloperLastName = (assignment.Developer != null) ? assignment.Developer.DeveloperLastName : ""
-            };
+            AssignmentDto assignmentDto = new AssignmentDto(assignment.AssignmentID, assignment.AssignmentDesc, assignment.Status, assignment.Priority, assignment.Developer);
             if (assignment == null)
             {
                 return NotFound();
@@ -128,7 +101,6 @@ namespace TaskTrackingApp.Controllers
         /// POST: api/AssignmentData/UpdateAssignment/5
         /// FORM DATA: Animal JSON Object
         /// </example>
-        [ResponseType(typeof(void))]
         [ResponseType(typeof(void))]
         [HttpPost]
         public IHttpActionResult UpdateAssignment(int id, Assignment assignment)
