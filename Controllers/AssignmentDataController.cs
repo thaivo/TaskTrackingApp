@@ -103,6 +103,7 @@ namespace TaskTrackingApp.Controllers
         /// </example>
         [ResponseType(typeof(void))]
         [HttpPost]
+        [Authorize]
         public IHttpActionResult UpdateAssignment(int id, Assignment assignment)
         {
             if (!ModelState.IsValid)
@@ -152,6 +153,7 @@ namespace TaskTrackingApp.Controllers
         /// </example>
         [ResponseType(typeof(Assignment))]
         [HttpPost]
+        [Authorize]
         public IHttpActionResult AddAssignment(Assignment assignment)
         {
             if (!ModelState.IsValid)
@@ -180,6 +182,7 @@ namespace TaskTrackingApp.Controllers
         /// </example>
         [ResponseType(typeof(Assignment))]
         [HttpPost]
+        [Authorize]
         public IHttpActionResult DeleteAssignment(int id)
         {
             Assignment assignment = db.Assignments.Find(id);
