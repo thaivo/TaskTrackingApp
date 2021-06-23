@@ -42,17 +42,14 @@
     </thead>
     <tbody>
         @{
-            int i = 1;
             foreach (var task in Model.assignedTasks)
             {
                 <tr>
-                    <td>@(i)</td>
+                    <td>@task.AssignmentID</td>
                     <td>@task.AssignmentDesc</td>
                     <td>@task.PriorityStr</td>
                     <td>@task.StatusStr</td>
                 </tr>
-                i++;
-
             }
         }
         
