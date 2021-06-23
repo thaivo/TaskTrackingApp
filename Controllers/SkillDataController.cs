@@ -140,6 +140,7 @@ namespace TaskTrackingApp.Controllers
         /// </example>
         [ResponseType(typeof(void))]
         [HttpPost]
+        [Authorize]
         public IHttpActionResult UpdateSkill(int id, Skill skill)
         {
             if (!ModelState.IsValid)
@@ -189,6 +190,7 @@ namespace TaskTrackingApp.Controllers
         /// </example>
         [ResponseType(typeof(Skill))]
         [HttpPost]
+        [Authorize]
         public IHttpActionResult AddSkill(Skill skill)
         {
             if (!ModelState.IsValid)
@@ -217,6 +219,7 @@ namespace TaskTrackingApp.Controllers
         /// </example>
         [ResponseType(typeof(Skill))]
         [HttpPost]
+        [Authorize]
         public IHttpActionResult DeleteSkill(int id)
         {
             Skill skill = db.Skills.Find(id);
