@@ -1,7 +1,7 @@
 ﻿@model TaskTrackingApp.Models.ViewModels.DetailsDeveloper
 @{
     ViewBag.Title = "Details";
-    
+
 }
 
 <h2>Details of a developer</h2>
@@ -12,10 +12,10 @@
 <div>
     <p>List of skills developer has:</p>
     <div style="border:1px solid grey;background-color:gainsboro;">
-@foreach(var skill in Model.skillsDeveloperHas)
-            {
-                <a href="/Skill/Details/@skill.SkillID">@skill.SkillName</a><a href="/Developer/Remove/@Model.selectedDeveloper.DevID?SkillID=@skill.SkillID">[x]</a>
-            }
+        @foreach (var skill in Model.skillsDeveloperHas)
+        {
+            <a href="/Skill/Details/@skill.SkillID">@skill.SkillName</a><a href="/Developer/Remove/@Model.selectedDeveloper.DevID?SkillID=@skill.SkillID">[x]</a>
+        }
     </div>
     <div>
         <p>List of skills developer does not have:</p>
@@ -31,29 +31,49 @@
         </form>
     </div>
 </div>
-<table>
-    <thead>
-        <tr>
-            <th>order</th>
-            <th>Task description</th>
-            <th>Priority</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            foreach (var task in Model.assignedTasks)
-            {
-                <tr>
-                    <td>@task.AssignmentID</td>
-                    <td>@task.AssignmentDesc</td>
-                    <td>@task.PriorityStr</td>
-                    <td>@task.StatusStr</td>
-                </tr>
-            }
+<div class="container">
+    <div class="row table-bordered">
+        <div class="col-md-2">#</div>
+        <div class="col-md-2">Task description</div>
+        <div class="col-md-2">Priority</div>
+        <div class="col-md-2">Status</div>
+    </div>
+    @{
+        foreach (var task in Model.assignedTasks)
+        {
+            <div class="row table-bordered">
+                <div class="col-md-2">@task.AssignmentID</div>
+                <div class="col-md-2">@task.AssignmentDesc</div>
+                <div class="col-md-2">@task.getPriority()</div>
+                <div class="col-md-2">@task.getStatus()</div>
+            </div>
         }
-        
+    }
+</div>
 
-    </tbody>
-</table>
+<!--  <table class="table">
+      <thead>
+          <tr>
+              <th>order</th>
+              <th>Task description</th>
+              <th>Priority</th>
+              <th>Status</th>
+          </tr>
+      </thead>
+      <tbody>
+          @{
+              foreach (var task in Model.assignedTasks)
+              {
+                  <tr>
+                      <td>@task.AssignmentID</td>
+                      <td>@task.AssignmentDesc</td>
+                      <td>@task.getPriority()</td>
+                      <td>@task.getStatus()</td>
+                  </tr>
+              }
+          }
 
+
+      </tbody>
+  </table>
+    -->

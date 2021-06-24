@@ -20,7 +20,7 @@
             @for (var i = 0; i < @statuses.Length; i++)
             {
                 string selected = "";
-                if (statuses[i] == Model.relatedAssignment.StatusStr)
+                if (statuses[i] == Model.relatedAssignment.getStatus())
                 {
                     selected = "selected";
                 }
@@ -34,7 +34,7 @@
             @for (var i = 0; i < priorities.Length; i++)
             {
                 string selected = "";
-                if (priorities[i] == Model.relatedAssignment.PriorityStr)
+                if (priorities[i] == Model.relatedAssignment.getPriority())
                 {
                     selected = "selected";
                 }

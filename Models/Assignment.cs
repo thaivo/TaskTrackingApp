@@ -40,10 +40,8 @@ namespace TaskTrackingApp.Models
     {
         public int AssignmentID { get; set; }
         public string AssignmentDesc { get; set; }
-        //public Status Status { get; set; }
-        public String StatusStr { get; set; }
-        //public Priority Priority { get; set; }
-        public String PriorityStr { get; set; }
+        public Status Status { get; set; }
+        public Priority Priority { get; set; }
         public int DevID { get; set; }
         public string DeveloperFirstName { get; set; }
         public string DeveloperLastName { get; set; }
@@ -52,16 +50,19 @@ namespace TaskTrackingApp.Models
         {
             AssignmentID = id;
             AssignmentDesc = description;
-            setStatus(status);
-            setPriority(priority);
+            //setStatus(status);
+            //setPriority(priority);
+            Status = status;
+            Priority = priority;
             DevID = (developer != null) ? (int)developer.DevID : 0;
             DeveloperFirstName = (developer != null) ? developer.DeveloperFirstName : "";
             DeveloperLastName = (developer != null) ? developer.DeveloperLastName : "";
         }
 
-        public void setStatus(Status status)
+        public String getStatus()
         {
-            switch (status)
+            String StatusStr = "";
+            switch (Status)
             {
                 case Status.Open:
                     StatusStr = "Open";
@@ -82,6 +83,7 @@ namespace TaskTrackingApp.Models
                     Console.WriteLine("Cannot retrieve assignment status");
                     break;
             }
+            return StatusStr;
             /*if(status == Status.Open)
             {
                 result = "Open";
@@ -102,9 +104,10 @@ namespace TaskTrackingApp.Models
             */
         }
 
-        public void setPriority(Priority priority)
+        public String getPriority()
         {
-            switch (priority)
+            String PriorityStr = "";
+            switch (Priority)
             {
                 case Priority.Trivial:
                     PriorityStr = "Trivial";
@@ -125,6 +128,7 @@ namespace TaskTrackingApp.Models
                     Console.WriteLine("Cannot retrieve assignment priority");
                     break;
             }
+            return PriorityStr;
         }
         
     }
