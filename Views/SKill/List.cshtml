@@ -2,12 +2,34 @@
 @{
     ViewBag.Title = "List";
 }
-<a href="/Skill/New">Create a new skill</a>
+<!--<a href="/Skill/New">Create a new skill</a>-->
 <h2>List of Skills</h2>
-@foreach(var skill in Model)
-            {
-<div>
-    <a href="/Skill/Details/@skill.SkillID">@skill.SkillName</a>
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchData")
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </p>
+}
+<div class="container">
+    <div class="row table-bordered">
+        <div class="col-md-2">@Html.ActionLink("#", "List", new { SortOrder = ViewBag.IDSortParam })</div>
+        <div class="col-md-2">Skill name</div>
+        <div class="col-md-2">Details</div>
+    </div>
+    @foreach (var skill in Model)
+    {
+        <div class="row table-bordered">
+            <div class="col-md-2">@skill.SkillID</div>
+            <div class="col-md-2">@skill.SkillName</div>
+            <div class="col-md-2">
+                <form action="/Skill/Details/@skill.SkillID" method="get">
+                    <button type="submit" class="btn btn-primary" value="Details">Details</button>
+                </form>
+            </div>
+        </div>
+
+    }
+
 </div>
-                
-            }
+<a href="/Skill/New" class="btn btn-success ">Add a new skill</a>

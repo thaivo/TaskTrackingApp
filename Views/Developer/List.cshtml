@@ -5,9 +5,48 @@
 
 
 
-<h2>List</h2>
-@foreach(var developer in Model)
-            {
-                <h2><a href="/Developer/Details/@developer.DevID">@developer.DeveloperFirstName @developer.DeveloperLastName</a></h2>
-                <div>@developer.DeveloperPosition</div>
-            }
+<h2>List of developers</h2>
+@*<p>
+        @Html.ActionLink("Create a developer", "New")
+    </p>
+    @foreach(var developer in Model)
+                {
+                    <h2><a href="/Developer/Details/@developer.DevID">@developer.DeveloperFirstName @developer.DeveloperLastName</a></h2>
+                    <div>@developer.DeveloperPosition</div>
+                }
+*@
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchData")
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </p>
+}
+<div class="container">
+    <div class="row table-bordered">
+        <div class="col-md-2">#</div>
+        <div class="col-md-2">Name</div>
+        <div class="col-md-2">@Html.ActionLink("Position", "List", new { SortOrder = ViewBag.PositionSortParam })</div>
+        <div class="col-md-2">Details</div>
+    </div>
+    @{
+        foreach (var developer in Model)
+        {
+            <div class="row table-bordered">
+                <div class="col-md-2">@developer.DevID</div>
+                <div class="col-md-2">@developer.DeveloperFirstName @developer.DeveloperLastName</div>
+                <div class="col-md-2">@developer.DeveloperPosition</div>
+
+
+                <div class="col-md-2">
+                    <form action="/Developer/Details/@developer.DevID" method="get">
+                        <button type="submit" class="btn btn-primary" value="Details">Details</button>
+                    </form>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<a href="/Developer/New" class="btn btn-success ">Add a new developer</a>

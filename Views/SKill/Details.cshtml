@@ -2,15 +2,21 @@
 @{
     ViewBag.Title = "Details";
 }
+<!--
 <a href="/Skill/DeleteConfirm/@Model.selectedSkillDto.SkillID">Confirm a delete</a>
 <a href="/Skill/Edit/@Model.selectedSkillDto.SkillID">Update</a>
+    -->
+<a href="/Skill/List/" class="btn btn-info">Back to the list</a>
 <h2>Details</h2>
 <p>Skill: @Model.selectedSkillDto.SkillName</p>
-<p>possessors:</p>
-@foreach(var developer in Model.relatedDeveloperDtos)
-            {
-                <a href="/Developer/Details/@developer.DevID">
-                    @developer.DeveloperFirstName @developer.DeveloperLastName
-                </a>
-            }
+<p>Developers have this skill:</p>
+<div class="container"></div>
+@foreach (var developer in Model.relatedDeveloperDtos)
+{
+    <a href="/Developer/Details/@developer.DevID">
+        @developer.DeveloperFirstName @developer.DeveloperLastName
+    </a>
+}
 
+<a href="/Skill/Edit/@Model.selectedSkillDto.SkillID" class="btn btn-info">Update</a>
+<a href="/Skill/DeleteConfirm/@Model.selectedSkillDto.SkillID" class="btn btn-danger">Delete</a>

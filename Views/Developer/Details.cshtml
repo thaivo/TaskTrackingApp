@@ -4,33 +4,39 @@
 
 }
 
+<a href="/Developer/List/" class="btn btn-info">Back to the list</a>
 <h2>Details of a developer</h2>
-<a href="/Developer/Edit/@Model.selectedDeveloper.DevID">Update</a>
-<a href="/Developer/DeleteConfirm/@Model.selectedDeveloper.DevID">Delete</a>
-<p>@Model.selectedDeveloper.DeveloperFirstName @Model.selectedDeveloper.DeveloperLastName</p>
-<p>Position: @Model.selectedDeveloper.DeveloperPosition</p>
+
+<p><strong>Name</strong>: @Model.selectedDeveloper.DeveloperFirstName @Model.selectedDeveloper.DeveloperLastName</p>
+
+<p><strong>Position</strong>: @Model.selectedDeveloper.DeveloperPosition</p>
 <div>
-    <p>List of skills developer has:</p>
-    <div style="border:1px solid grey;background-color:gainsboro;">
+    <p><strong> List of skills developer has</strong>:</p>
+    <div style="border:1px solid grey;background-color:gainsboro; margin-bottom:8px;">
         @foreach (var skill in Model.skillsDeveloperHas)
         {
-            <a href="/Skill/Details/@skill.SkillID">@skill.SkillName</a><a href="/Developer/Remove/@Model.selectedDeveloper.DevID?SkillID=@skill.SkillID">[x]</a>
+            <a href="/Skill/Details/@skill.SkillID">@skill.SkillName</a><a href="/Developer/Remove/@Model.selectedDeveloper.DevID?SkillID=@skill.SkillID" class="text-danger">[x]</a>
         }
     </div>
     <div>
-        <p>List of skills developer does not have:</p>
         <form method="post" action="/Developer/Add/@Model.selectedDeveloper.DevID">
-            <select name="SkillID">
-                @foreach (var skill in Model.skillsDeveloperDoesNotHave)
-                {
-                    <option value="@skill.SkillID">@skill.SkillName</option>
-                }
+            <div class="form-group row">
+                <label for="SkillID" class="col-sm-3"><strong>List of skills developer does not have</strong>:</label>
+                <div class="col-sm-3">
+                    <select id="SkillID" name="SkillID" class="form-control">
+                        @foreach (var skill in Model.skillsDeveloperDoesNotHave)
+                        {
+                            <option value="@skill.SkillID">@skill.SkillName</option>
+                        }
 
-            </select>
-            <input type="submit" value="Add Skill" />
+                    </select>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Add Skill" />
+            </div>
         </form>
     </div>
 </div>
+<p><strong>Assigned tasks</strong>:</p>
 <div class="container">
     <div class="row table-bordered">
         <div class="col-md-2">#</div>
@@ -50,6 +56,9 @@
         }
     }
 </div>
+
+<a href="/Developer/Edit/@Model.selectedDeveloper.DevID" class="btn btn-warning">Update</a>
+<a href="/Developer/DeleteConfirm/@Model.selectedDeveloper.DevID" class="btn btn-danger">Delete</a>
 
 <!--  <table class="table">
       <thead>

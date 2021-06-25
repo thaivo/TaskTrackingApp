@@ -20,7 +20,7 @@ namespace TaskTrackingApp.Controllers
         /// </summary>
         /// <returns>
         /// HEADER: 200 (OK)
-        /// CONTENT: all assignments in the database, including their associated developers.
+        /// CONTENT: all assignments in the database.
         /// </returns>
         /// <example>
         /// GET: api/AssignmentData/ListAssignments
@@ -151,11 +151,12 @@ namespace TaskTrackingApp.Controllers
         /// POST: api/AssignmentData/AddAssignment
         /// FORM DATA: Assignment JSON Object
         /// </example>
-        [ResponseType(typeof(Assignment))]
+        [ResponseType(typeof(void))]
         [HttpPost]
         [Authorize]
         public IHttpActionResult AddAssignment(Assignment assignment)
         {
+            Console.WriteLine("assignmentdata/addassignment");
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -180,7 +181,7 @@ namespace TaskTrackingApp.Controllers
         /// POST: api/AssignmentData/DeleteAssignment/5
         /// FORM DATA: (empty)
         /// </example>
-        [ResponseType(typeof(Assignment))]
+        [ResponseType(typeof(void))]
         [HttpPost]
         [Authorize]
         public IHttpActionResult DeleteAssignment(int id)

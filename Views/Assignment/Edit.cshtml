@@ -11,53 +11,63 @@
         @* Pass through the animal ID *@
         <input type="number" name="AssignmentID" value="@Model.relatedAssignment.AssignmentID" />
     </div>
-    <div>
-        <label>Description:</label> <input type="text" name="AssignmentDesc" value="@Model.relatedAssignment.AssignmentDesc" />
+    <div class="form-group row">
+        <label for="AssignmentDesc" class="col-sm-2">Description:</label>
+        <div class="col-sm-10">
+            <input type="text" id="AssignmentDesc" name="AssignmentDesc" class="form-control" value="@Model.relatedAssignment.AssignmentDesc" />
+        </div>
     </div>
-    <div>
-        <label>Status:</label>
-        <select name="Status">
-            @for (var i = 0; i < @statuses.Length; i++)
-            {
-                string selected = "";
-                if (statuses[i] == Model.relatedAssignment.getStatus())
+    <div class="form-group row">
+        <label for="Status" class="col-sm-2">Status:</label>
+        <div class="col-sm-10">
+            <select id="Status" name="Status" class="form-control">
+                @for (var i = 0; i < @statuses.Length; i++)
                 {
-                    selected = "selected";
+                    string selected = "";
+                    if (statuses[i] == Model.relatedAssignment.getStatus())
+                    {
+                        selected = "selected";
+                    }
+                    <option value="@i" @selected>@statuses[i]</option>
                 }
-                <option value="@i" @selected>@statuses[i]</option>
-            }
-        </select>
+            </select>
+        </div>
     </div>
-    <div>
-        <label>Priority:</label>
-        <select name="Priority">
-            @for (var i = 0; i < priorities.Length; i++)
-            {
-                string selected = "";
-                if (priorities[i] == Model.relatedAssignment.getPriority())
+    <div class="form-group row">
+        <label for="Priority" class="col-sm-2">Priority:</label>
+        <div class="col-sm-10">
+            <select id="Priority" name="Priority" class="form-control">
+                @for (var i = 0; i < priorities.Length; i++)
                 {
-                    selected = "selected";
+                    string selected = "";
+                    if (priorities[i] == Model.relatedAssignment.getPriority())
+                    {
+                        selected = "selected";
+                    }
+                    <option value="@i" @selected>@priorities[i]</option>
                 }
-                <option value="@i" @selected>@priorities[i]</option>
-            }
-        </select>
+            </select>
+        </div>
+        
     </div>
-    <div>
-        <label>Developers:</label>
-        <select name="DevID">
-            <option value="0"></option>
-            @foreach (var developer in Model.developerDtos)
-            {
-                string selected = "";
-                if (Model.relatedAssignment.DevID == developer.DevID)
+    <div class="form-group row">
+        <label for="DevID" class="col-sm-2">Developers:</label>
+        <div class="col-sm-10">
+            <select id="DevID" name="DevID" class="form-control">
+                <option value="0"></option>
+                @foreach (var developer in Model.developerDtos)
                 {
-                    selected = "selected";
+                    string selected = "";
+                    if (Model.relatedAssignment.DevID == developer.DevID)
+                    {
+                        selected = "selected";
+                    }
+                    <option value="@developer.DevID" @selected>@developer.DeveloperFirstName @developer.DeveloperLastName (@developer.DeveloperPosition)</option>
                 }
-                <option value="@developer.DevID" @selected>@developer.DeveloperFirstName @developer.DeveloperLastName (@developer.DeveloperPosition)</option>
-            }
-        </select>
+            </select>
+        </div>
     </div>
     <div>
-        <input type="submit" value="Update Assignment" />
+        <input type="submit" class="btn btn-primary" value="Update Assignment" />
     </div>
 </form>

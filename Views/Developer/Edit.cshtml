@@ -9,17 +9,20 @@
         @* Pass through the animal ID *@
         <input type="text" name="DevID" value="@Model.DevID" />
     </div>
-    <div>
-        <label>First name:</label> <input type="text" name="DeveloperFirstName" value="@Model.DeveloperFirstName" />
+    <div class="form-group row">
+        <label for="DeveloperFirstName" class="col-sm-2">First name:</label>
+        <input type="text" id="DeveloperFirstName" name="DeveloperFirstName" class="form-control col-sm-10" value="@Model.DeveloperFirstName" />
+    </div>
+    <div class="form-group row">
+        <label for="DeveloperLastName" class="col-sm-2">Last name:</label>
+        <input type="text" id="DeveloperLastName" name="DeveloperLastName" class="form-control col-sm-10" value="@Model.DeveloperLastName" />
+    </div>
+    <div class="form-group row">
+        <label for="DeveloperPosition" class="col-sm-2">Position:</label>
+        <input type="text" id="DeveloperPosition" name="DeveloperPosition" class="form-control col-sm-10" value="@Model.DeveloperPosition" />
     </div>
     <div>
-        <label>Last name:</label> <input type="text" name="DeveloperLastName" value="@Model.DeveloperLastName" />
-    </div>
-    <div>
-        <label>Position:</label> <input type="text" name="DeveloperPosition" value="@Model.DeveloperPosition" />
-    </div>
-    <div>
-        <input type="submit" value="Update Developer" />
+        <input type="submit" class="btn btn-primary" value="Update Developer" />
 
     </div>
 </form>
