@@ -10,13 +10,26 @@
 <h2>Details</h2>
 <p>Skill: @Model.selectedSkillDto.SkillName</p>
 <p>Developers have this skill:</p>
-<div class="container"></div>
-@foreach (var developer in Model.relatedDeveloperDtos)
-{
-    <a href="/Developer/Details/@developer.DevID">
-        @developer.DeveloperFirstName @developer.DeveloperLastName
-    </a>
-}
+<div class="container">
+    <div class="row table-bordered">
+        <div class="col-md-2">#</div>
+        <div class="col-md-2">Developer name</div>
+    </div>
+    @foreach (var developer in Model.relatedDeveloperDtos)
+    {
+        <div class="row table-bordered">
+            <div class="col-md-2">@developer.DevID</div>
+            <div class="col-md-2">
+                <a href="/Developer/Details/@developer.DevID">
+                    @developer.DeveloperFirstName @developer.DeveloperLastName
+                </a>
+            </div>
+        </div>
+        
+    }
+
+</div>
+
 
 <a href="/Skill/Edit/@Model.selectedSkillDto.SkillID" class="btn btn-info">Update</a>
 <a href="/Skill/DeleteConfirm/@Model.selectedSkillDto.SkillID" class="btn btn-danger">Delete</a>

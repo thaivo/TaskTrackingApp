@@ -2,7 +2,8 @@
 @{
     ViewBag.Title = "Edit";
 }
-<a href="/Skill/Details/@Model.SkillID">Back to details</a>
+
+<a href="/Skill/Details/@Model.SkillID" class="btn btn-info">Back to details</a>
 <h2>Update skill</h2>
 <form action="/Skill/Update/@Model.SkillID" method="POST">
     <div style="display:none;">
