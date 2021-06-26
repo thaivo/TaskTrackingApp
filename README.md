@@ -32,7 +32,7 @@ Navigate to /Developer/List
 
 Navigate to Developer/Details/{developer id}
 
-# ERD and relationships:
+# ERD:
 ![image](https://user-images.githubusercontent.com/12003260/123426301-446e8500-d591-11eb-873c-91deac1a86c3.png)
 ![image](https://user-images.githubusercontent.com/12003260/123426355-518b7400-d591-11eb-8a80-8b8a81a81a07.png)
 
