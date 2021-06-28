@@ -5,7 +5,7 @@
     String[] priorities = { "Trivial", "Minor", "Major", "Critical", "Blocker" };
 }
 
-<h2>Update assignment</h2>
+<h2>Update this task</h2>
 <form action="/Assignment/Update/@Model.relatedAssignment.AssignmentID" method="POST">
     <div style="display:none;">
         @* Pass through the animal ID *@
@@ -68,6 +68,6 @@
         </div>
     </div>
     <div>
-        <input type="submit" class="btn btn-primary" value="Update Assignment" />
+        <input type="submit" class="btn btn-primary" value="Update task" />
     </div>
 </form>

@@ -8,7 +8,7 @@
     @Html.ActionLink("Add new assignment", "New")
 </p>
     -->
-<h2>List of assignments</h2>
+<h2>List of tasks</h2>
 @using (Html.BeginForm())
 {
     <p>
@@ -18,14 +18,14 @@
 }
 <div class="container">
     <div class="row table-bordered">
-        <div class="col-md-2">#</div>
-        <div class="col-md-2">Task description</div>
+        <div class="col-sm-2">#</div>
+        <div class="col-sm-2">Task description</div>
         <!--<div class="col-md-2">Priority</div>
         <div class="col-md-2">Status</div>
             -->
-        <div class="col-md-2">@Html.ActionLink("Priority", "List", new { SortOrder = ViewBag.PrioritySortParam })</div>
-        <div class="col-md-2">@Html.ActionLink("Status", "List", new { SortOrder = ViewBag.StatusSortParam })</div>
-        <div class="col-md-2">Assignee</div>
+        <div class="col-sm-2">@Html.ActionLink("Priority", "List", new { SortOrder = ViewBag.PrioritySortParam })</div>
+        <div class="col-sm-2">@Html.ActionLink("Status", "List", new { SortOrder = ViewBag.StatusSortParam })</div>
+        <div class="col-sm-2">Assignee</div>
 
     </div>
     @{
@@ -37,13 +37,13 @@
                 bg = "bg-success";
             }
             <div class="row table-bordered @bg">
-                <div class="col-md-2">@task.AssignmentID</div>
-                <div class="col-md-2">@task.AssignmentDesc</div>
-                <div class="col-md-2">@task.getPriority()</div>
-                <div class="col-md-2">@task.getStatus()</div>
-                <div class="col-md-2">@task.DeveloperFirstName @task.DeveloperLastName</div>
+                <div class="col-sm-2">@task.AssignmentID</div>
+                <div class="col-sm-2">@task.AssignmentDesc</div>
+                <div class="col-sm-2">@task.getPriority()</div>
+                <div class="col-sm-2">@task.getStatus()</div>
+                <div class="col-sm-2">@task.DeveloperFirstName @task.DeveloperLastName</div>
 
-                <div class="col-md-2">
+                <div class="col-sm-2">
                     <form action="/Assignment/Details/@task.AssignmentID" method="get">
                         <button type="submit" class="btn btn-primary" value="Details">Details</button>
                     </form>
@@ -62,4 +62,4 @@
 
     }
 *@
-<a href="/Assignment/New" class="btn btn-success">Create a new assignment</a>
+<a href="/Assignment/New" class="btn btn-success">Create a new task</a>
