@@ -19,20 +19,20 @@
         }
     </div>
     <div>
-        <form method="post" action="/Developer/Add/@Model.selectedDeveloper.DevID">
-            <div class="form-group row">
-                <label for="SkillID" class="col-sm-3"><strong>List of skills developer does not have</strong>:</label>
-                <div class="col-sm-3">
-                    <select id="SkillID" name="SkillID" class="form-control">
-                        @foreach (var skill in Model.skillsDeveloperDoesNotHave)
-                        {
-                            <option value="@skill.SkillID">@skill.SkillName</option>
-                        }
+        <form method="post" action="/Developer/Add/@Model.selectedDeveloper.DevID" class="form-group row">
+            <!--<div class="form-group row">-->
+            <label for="SkillID" class="col-sm-3"><strong>List of skills developer does not have</strong>:</label>
+            <!--<div class="col-sm-3">-->
+            <select id="SkillID" name="SkillID" class="form-control col-sm-3" >
+                @foreach (var skill in Model.skillsDeveloperDoesNotHave)
+                {
+                    <option value="@skill.SkillID">@skill.SkillName</option>
+                }
 
-                    </select>
-                </div>
-                <input type="submit" class="btn btn-primary" value="Add Skill" />
-            </div>
+            </select>
+            <!--</div>-->
+            <input type="submit" class="btn btn-primary" value="Add Skill" />
+            <!--</div>-->
         </form>
     </div>
 </div>
